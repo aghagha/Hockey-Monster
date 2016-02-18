@@ -14,7 +14,7 @@ public class BulletController : MonoBehaviour {
 	}
 
 	void Spawn(){
-		Vector3 pos = new Vector3(Random.Range(-7.7f,6.6f),2.35f,2.8f);
+		Vector3 pos = new Vector3(Random.Range(-7.7f,6.6f),10f,2.8f);
 		Instantiate(bullet,pos,Quaternion.identity);
 	}
 }
