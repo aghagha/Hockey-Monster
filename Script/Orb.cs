@@ -1,14 +1,21 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Orb : MonoBehaviour {
 	
 	public float speed = 20f;
+    public GameObject barrier;
+    public Button barrierButton;
+
 	Rigidbody2D rb;
+    public float barrierTimer = 0f;
 
 	void Awake(){
 		rb = GetComponent<Rigidbody2D>();
-	}
+        barrier.GetComponent<Renderer>().enabled = false;
+        barrier.GetComponent<Collider2D>().enabled = false;
+    }
 	
 	void Start () {
 		
@@ -16,7 +23,19 @@ public class Orb : MonoBehaviour {
 
 	void Update () {
 
-	}
+        if (barrierTimer > 0f)
+        {
+            barrier.GetComponent<Renderer>().enabled = true;
+            barrier.GetComponent<Collider2D>().enabled = true;
+            Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), barrier.GetComponent<Collider2D>());
+            barrierTimer -= 1f;
+        }
+        else
+        {
+            barrier.GetComponent<Renderer>().enabled = false;
+            barrier.GetComponent<Collider2D>().enabled = false;
+        }
+    }
 	
 	void FixedUpdate(){
 		Vector3 pos = Input.mousePosition;
@@ -28,7 +47,7 @@ public class Orb : MonoBehaviour {
 	}
 	
 	void InvisWall(ref Vector3 pos){
-		if(pos.y > -5f) pos.y = -5f;
+		if(pos.y > -3f) pos.y = -3f;
 	}
 	
 	void MoveToFinger(Vector3 pos){
@@ -42,5 +61,10 @@ public class Orb : MonoBehaviour {
 		xy.Raycast(ray, out distance);
 		return ray.GetPoint(distance);
 	}
+
+    public void ActivateBarrier()
+    {
+        barrierTimer = 100f;
+    }
 	
 }
