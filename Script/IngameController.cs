@@ -23,6 +23,7 @@ public class IngameController : MonoBehaviour
 
     public void LoserNotification(GameObject g)
     {
+        Time.timeScale = 0;
         if(g.tag == "Player")
         {
             ShowGameOver();
@@ -45,6 +46,31 @@ public class IngameController : MonoBehaviour
 
     public void Pause()
     {
+        Time.timeScale = 0;
         pauseContainer.GetComponent<ContainerController>().Open();
+    }
+
+    public void Resume()
+    {
+        Time.timeScale = 1;
+        pauseContainer.GetComponent<ContainerController>().Close();
+    }
+
+    public void Retry()
+    {
+        Time.timeScale = 1;
+        Application.LoadLevel(Application.loadedLevelName);
+    }
+
+    public void Quit()
+    {
+        Time.timeScale = 1;
+        Application.LoadLevel("MainMenu");
+    }
+
+    public void Next()
+    {
+        Time.timeScale = 1;
+        Application.LoadLevel("");
     }
 }

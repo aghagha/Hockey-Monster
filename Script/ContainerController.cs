@@ -8,7 +8,9 @@ public class ContainerController : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-        animator = this.GetComponent<Animator>();	
+        animator = this.GetComponent<Animator>();
+        if (animator != null)
+            animator.enabled = true;
 	}
 	
 	// Update is called once per frame
