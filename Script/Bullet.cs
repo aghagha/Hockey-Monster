@@ -53,7 +53,6 @@ public class Bullet : MonoBehaviour {
 			Vector3 newVelocity = velocity.normalized;
 			newVelocity *= maxVelocity;
 			rb.velocity = newVelocity;
-		
 		}
 	}
 }

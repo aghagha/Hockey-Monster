@@ -32,8 +32,8 @@ public class PlayerController : MonoBehaviour {
     {
         if(col.gameObject.tag == "bullets")
         {
-            float damage = col.gameObject.GetComponent<Bullet>().damage;
-            float force = col.gameObject.GetComponent<Bullet>().currMag;
+            float damage = col.gameObject.GetComponent<BulletFather>().damage;
+            float force = col.gameObject.GetComponent<BulletFather>().currMag;
             float totalDamage = damage + force;
             hp -= totalDamage;
             healthBar.value = hp;

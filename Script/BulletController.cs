@@ -2,19 +2,44 @@
 using System.Collections;
 
 public class BulletController : MonoBehaviour {
-	public GameObject bullet;
+	public GameObject bullet1;
+    public GameObject bullet2;
+    public GameObject bullet3;
+
+    public float bulletTimer = 1000f;
+
+
 	// Use this for initialization
 	void Start () {
-		InvokeRepeating("Spawn" ,1f, 2f);
+        
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        bulletTimer -= 1f;
+        if (bulletTimer > 400f)
+        {
+            if(bulletTimer % 70 == 0)
+                AttackTypeOne();
+        }
+        else if(bulletTimer % 10000 == 0)
+        {
+            AttackTypeTwo();
+            if (bulletTimer <= 0f) bulletTimer = 1000f;
+        }
+    }
 
-	void Spawn(){
-		Vector3 pos = new Vector3(Random.Range(-7.7f,6.6f),10f,2.8f);
-		Instantiate(bullet,pos,Quaternion.identity);
-	}
+    void AttackTypeOne()
+    {
+        Vector3 pos = new Vector3(-0.2f, 10f, 2.8f);
+        Instantiate(bullet1, pos, Quaternion.identity);
+        
+
+    }
+
+    void AttackTypeTwo()
+    {
+        Vector3 pos = new Vector3(-0.2f, 10f, 2.8f);
+        Instantiate(bullet2, pos, Quaternion.identity);
+    }
 }

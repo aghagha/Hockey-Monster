@@ -22,19 +22,12 @@ public class Orb : MonoBehaviour {
 	}
 
 	void Update () {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
 
-        if (barrierTimer > 0f)
-        {
-            barrier.GetComponent<Renderer>().enabled = true;
-            barrier.GetComponent<Collider2D>().enabled = true;
-            Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), barrier.GetComponent<Collider2D>());
-            barrierTimer -= 1f;
-        }
-        else
-        {
-            barrier.GetComponent<Renderer>().enabled = false;
-            barrier.GetComponent<Collider2D>().enabled = false;
-        }
+        BarrierSkill();
     }
 	
 	void FixedUpdate(){
@@ -51,7 +44,7 @@ public class Orb : MonoBehaviour {
 	}
 	
 	void MoveToFinger(Vector3 pos){
-		rb.velocity = (pos - this.transform.position)*speed;
+		rb.velocity = (pos - transform.position)*speed;
 	}
 	
 	public Vector3 GetWorldPositionOnPlane(Vector3 screenPosition, float z) {
@@ -67,4 +60,20 @@ public class Orb : MonoBehaviour {
         barrierTimer = 100f;
     }
 	
+
+    void BarrierSkill()
+    {
+        if (barrierTimer > 0f)
+        {
+            barrier.GetComponent<Renderer>().enabled = true;
+            barrier.GetComponent<Collider2D>().enabled = true;
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), barrier.GetComponent<Collider2D>());
+            barrierTimer -= 1f;
+        }
+        else
+        {
+            barrier.GetComponent<Renderer>().enabled = false;
+            barrier.GetComponent<Collider2D>().enabled = false;
+        }
+    }
 }
