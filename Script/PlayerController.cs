@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour {
     public GameObject playerAvatar;
     public Slider healthBar;
 
+    private IngameController ingameController;
+
 	// Use this for initialization
 
     void Awake()
@@ -19,7 +21,7 @@ public class PlayerController : MonoBehaviour {
     }
 	void Start ()
     {
-	
+        ingameController = GameObject.Find("IngameController").GetComponent<IngameController>();
 	}
 	
 	// Update is called once per frame
@@ -45,6 +47,8 @@ public class PlayerController : MonoBehaviour {
                 healthBar.value = 0;
                 Destroy(playerAvatar);
                 isDead = true;
+
+                ingameController.LoserNotification(this.gameObject);
             }
         } else
         {

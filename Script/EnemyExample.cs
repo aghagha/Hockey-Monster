@@ -8,7 +8,8 @@ public class EnemyExample : MonoBehaviour {
 	public Text healthText;
 	public Slider healthSlider;
 	public GameObject monster;
-	
+
+    private IngameController ingameController;
 
 	// Use this for initialization
 	void Awake(){
@@ -19,7 +20,9 @@ public class EnemyExample : MonoBehaviour {
 
 	}
 
-	void Start () {
+    void Start()
+    {
+        ingameController = GameObject.Find("IngameController").GetComponent<IngameController>();
 
 	}
 	
@@ -30,7 +33,9 @@ public class EnemyExample : MonoBehaviour {
 
 	void IsDead(){
 		if(health <= 0f){
-			Destroy(monster);
+            Destroy(monster);
+
+            ingameController.LoserNotification(this.gameObject);
 		}
 	}
 
